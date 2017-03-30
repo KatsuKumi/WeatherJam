@@ -11,6 +11,8 @@
         <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 
+        <link href="css/weather-icons-wind.min.css" rel="stylesheet" type="text/css">
+        <link href="css/weather-icons.css" rel="stylesheet" type="text/css">
         <title>WeatherJam: the sound that fits your mood </title>
     </head>
 
@@ -55,10 +57,14 @@
             $pressure = $weatherarray["main"]["pressure"]* 0.00001 *100;
             $temp = $weatherarray["main"]["temp"];
             $humidity = $weatherarray["main"]["humidity"];
+            $winddegree = $weatherarray["wind"]["deg"];
+            $iconweather = $weatherarray['weather'][0]['id'];
+            echo '<strong>'.$city.'</strong><br>';
+            echo '<i class="owf owf-'.$iconweather.' owf-5x"></i>';
+            echo '<i class="wi wi-wind towards-'.$winddegree.'-deg owf-5x"></i>';
+            echo '<i class="wi wi-day-sunny owf-5x""></i>';
         }
         ?>
-
-        <i class="owf owf-<?php echo $weatherarray['weather'][0]['id'];?> owf-5x"></i>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
