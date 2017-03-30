@@ -7,10 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link href="css/owfont-regular.min.css" rel="stylesheet" type="text/css">
     <link href="css/owfont-regular.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+
     <link href="css/weather-icons-wind.min.css" rel="stylesheet" type="text/css">
     <link href="css/weather-icons.css" rel="stylesheet" type="text/css">
     <title>WeatherJam: the sound that fits your mood </title>
@@ -45,16 +49,16 @@
     </form>
 
 </div>
+<div id="history" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 panel panel-default" type='hidden'>
+</div>
 
-
-<div id='affichage' class="col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 panel panel-default container">
+<div id='currentweather' class="col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 panel panel-default ">
 
     <?php
     $city = htmlspecialchars($_POST["city"]);
     if (!empty($city)){
         $weatherjson = file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=".$city."&units=metric&appid=0e6f23f3b33300d4b282e44cd350003e");
         $weatherarray = json_decode($weatherjson, true);
-        /*var_dump($weatherarray);*/
         $pressure = $weatherarray["main"]["pressure"]* 0.00001 *100;
         $temp = $weatherarray["main"]["temp"];
         $humidity = $weatherarray["main"]["humidity"];
@@ -118,6 +122,12 @@
     </div>";
     }
     ?>
+
+</div>
+
+<div id="playlist" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 panel panel-default ">
+</div>
+<div id="weatherforecast" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 panel panel-default ">
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
