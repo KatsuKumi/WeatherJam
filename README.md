@@ -1,3 +1,3 @@
 # WeatherJam
 
-WeatherJam, fits your mood.
+WeatherJam,the sound that fits your mood.
