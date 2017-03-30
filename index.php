@@ -1,5 +1,26 @@
 <!DOCTYPE html>
-<?php include('weatherimgtable.php')?>
+<?php include('weatherimgtable.php');
+$backgroundimage = "bg.jpg";
+$city = htmlspecialchars($_POST["city"]);
+    if (!empty($city)) {
+        $weatherjson = file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=" . $city . "&units=metric&appid=0e6f23f3b33300d4b282e44cd350003e");
+        $weatherarray = json_decode($weatherjson, true);
+        $pressure = $weatherarray["main"]["pressure"] * 0.00001 * 100;
+        $temp = $weatherarray["main"]["temp"];
+        $humidity = $weatherarray["main"]["humidity"];
+        $winddegree = $weatherarray["wind"]["deg"];
+        $windspeed = $weatherarray["wind"]["speed"];
+        $iconweather = $weatherarray['weather'][0]['id'];
+        $weather = $weatherarray['weather'][0]['description'];
+        $weathermain = $weatherarray['weather'][0]['main'];
+        $weatherjsontom = file_get_contents("http://api.openweathermap.org/data/2.5/forecast?q=" . $city . "&appid=0e6f23f3b33300d4b282e44cd350003e");
+        $weatherarraytom = json_decode($weatherjsontom, true)["list"][8];
+        $weathertom = $weatherarraytom['weather'][0]['description'];
+        $weathermaintom = $weatherarraytom['weather'][0]['main'];
+        $backgroundimage = $backgroundimg[$weathermain];
+    }
+
+?>
 <html lang="en">
 
 <head>
@@ -20,19 +41,19 @@
     <title>WeatherJam: the sound that fits your mood </title>
 </head>
 
-<body class="container">
-<div class="row"><img src="logo.png" alt="WeatherJamLogo" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8"></div>
+<body class="container" style=" background: url('<?php echo $backgroundimage; ?>') no-repeat center center fixed;">
+
 <div class="page-header">
 
-    <h1 class="text-center"> WeatherJam: the sound that fits your mood 123434 . </h1>
+    <div class="col-md-offset-3 col-md-6 col-xs-offset-2 col-xs-8 transparentbackground"><h1 class="text-center"> WeatherJam: the sound that fits your moods. </h1></div>
 </div>
 
 
-<div class="row">
+<div class="row" >
 
 
 
-    <form action="index.php" method="post" class="col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 panel panel-default">
+    <form id="search" action="index.php" method="post" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 transparentbackground">
 
         <div class="text-center">
             <label for="weather"> Tell us where you are </label>
@@ -49,33 +70,20 @@
     </form>
 
 </div>
-<div id="history" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 panel panel-default" type='hidden'>
+<div id="history" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 transparentbackground" type='hidden'>
 </div>
 
-<div id='currentweather' class="col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 panel panel-default ">
 
     <?php
-    $city = htmlspecialchars($_POST["city"]);
     if (!empty($city)){
-        $weatherjson = file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=".$city."&units=metric&appid=0e6f23f3b33300d4b282e44cd350003e");
-        $weatherarray = json_decode($weatherjson, true);
-        $pressure = $weatherarray["main"]["pressure"]* 0.00001 *100;
-        $temp = $weatherarray["main"]["temp"];
-        $humidity = $weatherarray["main"]["humidity"];
-        $winddegree = $weatherarray["wind"]["deg"];
-        $windspeed = $weatherarray["wind"]["speed"];
-        $iconweather = $weatherarray['weather'][0]['id'];
-        $weather = $weatherarray['weather'][0]['description'];
-        $weatherjsontom = file_get_contents("http://api.openweathermap.org/data/2.5/forecast?q=".$city."&appid=0e6f23f3b33300d4b282e44cd350003e");
-        $weatherarraytom = json_decode($weatherjsontom, true)["list"][8];
-        $weathertom = $weatherarraytom['weather'][0]['description'];
         echo "
+<div id='affichage' class=\"col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 transparentbackground container\">
     <div class=\"row weathercontent\">
         <div class=\"col-md-3 col-xs-12\"><br>
             <div id=\"centeredleft\">
                 <div class=\"weatherico\">
-                    <i class=\"wi ".$weatherimg[$weather]." owf-5x\"></i>
-
+                    <i class=\"wi ".$weatherimg[$weathermain]." owf-5x\"></i><br>
+                    <i class=\"wi wi-wind-beaufort-".round($windspeed, 0)." owf-5x\"></i>
                 </div>
 
                 <div class=\"titleleft\">
@@ -93,10 +101,8 @@
 
         </div>
         <div class=\"col-lg-3 col-md-12\">
-
             <i class=\"wi wi-wind towards-".$winddegree."-deg owf-5x\"></i>
             <span class=\"degreetitle\">".$winddegree."</span><i class=\"wi wi-degrees owf-4x\"></i><br>
-            <i class=\"wi wi-wind-beaufort-".round($windspeed, 0)." owf-5x\"></i>
         </div>
     </div>
     <hr>
@@ -109,7 +115,7 @@
         <div class=\"col-lg-12 col-md-12\" >
             <div id=\"centeredleft\">
                 <div class=\"weatherico\">
-                    <i class=\"wi ".$weatherimg[$weathertom]." owf-5x\"></i>
+                    <i class=\"wi ".$weatherimg[$weathermaintom]." owf-5x\"></i>
 
                 </div>
 
@@ -119,20 +125,40 @@
             </div>
 
         </div>
+    </div>
     </div>";
+        $keyword = $keywordweather[$weathermain][array_rand($keywordweather[$weathermain])];
+        $listid = file_get_contents("http://api.deezer.com/search?q=".$keyword);
+        $listidarray = json_decode($listid, true);
+        $randomtabletrackdeez = $listidarray["data"][array_rand($listidarray["data"])];
+        $trackid = $randomtabletrackdeez['id'];
+        $titledeeze = $randomtabletrackdeez['title'];
+        echo '<div id="playlist" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 transparentbackground ">';
+        echo '<h1 class="text-center">Deezer</h1>';
+        echo '<h2 class="text-center">'.$titledeeze.'</h2>';
+        echo '<div class="centered"><div class="deezer-widget-player" data-src="http://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=350&height=350&color=007FEB&layout=light&size=medium&type=tracks&id='.$trackid.'&app_id=230222" data-scrolling="no" data-frameborder="0" data-allowTransparency="true" data-width="350" data-height="90"></div></div>';
+        echo '</div>';
+        echo '</div>';
     }
     ?>
 
-</div>
 
-<div id="playlist" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 panel panel-default ">
-</div>
+
+
 <div id="weatherforecast" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 panel panel-default ">
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script>
+    (function(d, s, id) {
+        var js, djs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "http://e-cdn-files.deezer.com/js/widget/loader.js";
+        djs.parentNode.insertBefore(js, djs);
+    }(document, "script", "deezer-widget-loader"));
+</script>
 
 </body>
 

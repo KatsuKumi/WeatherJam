@@ -1,4 +1,8 @@
  body {
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
  }
 
  .page-header h1 {
@@ -16,10 +20,18 @@
      display: inline-block;
  }
 
- #panelcontent {
-
+.transparentbackground{
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 50px;
+}
+ .page-header{
+     border-bottom: none;
  }
  #affichage{
+ }
+ .deezer-widget-player{
+     margin: auto;
+     width:350px;
  }
  .weathercontent{
      margin : 5%;
@@ -74,7 +86,12 @@
  .titleweather{
      text-align: center;
      font-size: 30px;
+     padding-bottom: 25px;
  }
  .weathertommorow{
      height: 50px;
+ }
+ #search{
+     padding-top: 20px;
+     padding-bottom: 20px;
  }
