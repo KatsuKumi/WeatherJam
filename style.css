@@ -1,7 +1,22 @@
-.container .page-header h1 {
+ body {
+     font-family: 'Indie Flower', cursive;
+ }
+
+ .page-header h1 {
+
 
 font-size: x-large;
-    color: red;
-    text-shadow: 5px 5px  #919191;
+    color: black;
+    /*text-shadow: 3px 3px  #919191; */
 
-}
+     font-family: 'Lobster', cursive;
+
+
+ }
+ .inline{
+     display: inline-block;
+ }
+
+ #panelcontent {
+
+ }

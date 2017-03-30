@@ -8,6 +8,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="style.css"><link href="css/owfont-regular.min.css" rel="stylesheet" type="text/css">
         <link href="css/owfont-regular.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
         <title>WeatherJam: the sound that fits your mood </title>
     </head>
 
@@ -15,26 +18,34 @@
     <div class="row"><img src="logo.png" alt="WeatherJamLogo" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8"></div>
     <div class="page-header">
 
-        <h1 class="text-center"> WeatherJam: the sound that fits your mood. </h1>
+        <h1 class="text-center"> WeatherJam: the sound that fits your mood 123434 . </h1>
     </div>
 
 
     <div class="row">
 
-        <form action="index.php" method="post" class="col-md-4 col-lg-4 col-sm-8 col-xs-8">
 
-            <div class="form-group">
 
-                <label for="weather"> Tell us where you are </label>
-                <input type="text" name="city" class="form-control" id="city" value="" placeholder="Enter a city name.">
+        <form action="index.php" method="post" class="col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 panel panel-default">
+
+            <div class="text-center">
+            <label for="weather"> Tell us where you are </label>
+
+            <div class="form-inline">
+
+
+
+                    <input type="text" name="city" class="form-control" id="city" value="" placeholder="Enter a city name.">
+                <button type="submit" id="sendbtn" class="btn btn-default">Submit</button>
 
             </div>
-            <button type="submit" id="sendbtn" class="btn btn-default">Submit</button>
+</div>
         </form>
+
     </div>
 
 
-    <div id='affichage'>
+    <div id='affichage' class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 panel panel-default ">
 
         <?php
         $city = htmlspecialchars($_POST["city"]);
