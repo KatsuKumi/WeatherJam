@@ -38,13 +38,15 @@
 
         <?php
         $city = htmlspecialchars($_POST["city"]);
-        $weatherjson = file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=".$city."&units=metric&appid=0e6f23f3b33300d4b282e44cd350003e");
-        $weatherarray = json_decode($weatherjson, true);
-        $pressure = $weatherarray["main"]["pressure"]* 0.00001 *100;
-        $temp = $weatherarray["main"]["temp"];
-        $humidity = $weatherarray["main"]["humidity"];
-        var_dump($weatherarray);
+        if (!empty($city)){
+            $weatherjson = file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=".$city."&units=metric&appid=0e6f23f3b33300d4b282e44cd350003e");
+            $weatherarray = json_decode($weatherjson, true);
+            $pressure = $weatherarray["main"]["pressure"]* 0.00001 *100;
+            $temp = $weatherarray["main"]["temp"];
+            $humidity = $weatherarray["main"]["humidity"];
+        }
         ?>
+
         <i class="owf owf-<?php echo $weatherarray['weather'][0]['id'];?> owf-5x"></i>
     </div>
 
