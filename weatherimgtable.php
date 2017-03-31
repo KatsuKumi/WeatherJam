@@ -18,10 +18,10 @@ $backgroundimg["Mist"] = "bgmist.jpg";
 
 $keywordweather["Clear"] = ["happy", "smile", "enjoy", "love", "friendly", "sweet", "chill", "hot", "summer"];
 $keywordweather["Clouds"] = ["silent", "peaceful", "peace", "calm", "serenity" ,"hope", "new", "sweet", "good", "mystery", "inspire"];
-$keywordweather["Drizzle"] = ["sad", "sorry","heartbroken", "morose" ,"blues", "imperfect", "incorrect", "shower", "emotional", "sensitive"];
-$keywordweather["rain"] = ["sad", "sorry","heartbroken", "morose" ,"blues", "imperfect", "incorrect", "shower", "rain", "rainy"];
+$keywordweather["Drizzle"] = ["sad", "sorry","heartbroken", "morose" ,"blues", "imperfect", "shower", "emotional", "sensitive"];
+$keywordweather["Rain"] = ["sad", "sorry", "morose" ,"blues", "imperfect",  "shower", "rain"];
 $keywordweather["Thunderstorm"] = ["violence", "hurt", "broken", "explosion", "mad", "thunder", "storm", "disaster", "apocalypse"];
-$keywordweather["Snow"] = ["snow", "winter", "christmas", "cold", " ice", "december", "november"];
+$keywordweather["Snow"] = ["snow", "winter", "christmas", "cold", " ice"];
 $keywordweather["Mist"] = ["lost", "lonely", "find", "alone", "worry", "mysterious", "hidden", "hiding"];
 
 ?>
