@@ -33,6 +33,9 @@ font-size: x-large;
     margin-bottom: 50px;
     border-radius: 10px;
 }
+.smallmargin{
+    margin-bottom: 10px;
+}
  .page-header{
      border-bottom: none;
  }

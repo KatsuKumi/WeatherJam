@@ -9,6 +9,7 @@ $city = htmlspecialchars($_POST["city"]);
         $pressure = $weatherarray["main"]["pressure"] * 0.00001 * 100;
         $temp = $weatherarray["main"]["temp"];
         $humidity = $weatherarray["main"]["humidity"];
+        $realcity = $weatherarray["name"];
         $winddegree = $weatherarray["wind"]["deg"];
         $windspeed = $weatherarray["wind"]["speed"];
         $iconweather = $weatherarray['weather'][0]['id'];
@@ -19,7 +20,6 @@ $city = htmlspecialchars($_POST["city"]);
         $weathertom = $weatherarraytom['weather'][0]['description'];
         $weathermaintom = $weatherarraytom['weather'][0]['main'];
         $backgroundimage = $backgroundimg[$weathermain];
-
         $keyword = $keywordweather[$weathermain][array_rand($keywordweather[$weathermain])];
         $listid = file_get_contents("http://api.deezer.com/search?q=".$keyword);
         $listidarray = json_decode($listid, true);
@@ -28,7 +28,7 @@ $city = htmlspecialchars($_POST["city"]);
         $titledeeze = $randomtabletrackdeez['title'];
 
         $conn = new mysqli($servername, $username, $password, $dbname);
-        $sql = "INSERT INTO search_history (ville,temp,meteo,titre) VALUES( '$city', '$temp', '$weather', '$titledeeze')";
+        $sql = "INSERT INTO search_history (ville,temp,meteo,titre) VALUES( '$realcity', '$temp', '$weather', '$titledeeze')";
         $conn->query($sql);
         $conn->close();
     }
@@ -89,7 +89,6 @@ $city = htmlspecialchars($_POST["city"]);
     <?php
     if (empty($city)){
         echo '<div id="history" class="col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 transparentbackground container" type=\'hidden\'>
-
     <div class="row">
         <div class="col-lg-12 col-md-12 titleweather" >
             History
@@ -124,6 +123,11 @@ $city = htmlspecialchars($_POST["city"]);
         echo "
         <div id='affichage' class=\"col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 transparentbackground container zoom-box\">
 
+        echo '<div id="playlist" class="col-md-3 col-xs-12 transparentbackground smallmargin ">
+        <h1 class="text-center">Deezer</h1>
+        <h2 class="text-center">'.$titledeeze.'</h2>
+        <div class="centered"><div class="deezer-widget-player" data-src="http://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=350&height=350&color=007FEB&layout=light&size=medium&type=tracks&id='.$trackid.'&app_id=230222" data-scrolling="no" data-frameborder="0" data-allowTransparency="true" data-width="350" data-height="90"></div></div>
+        </div></div>';
     <div class=\"row\">
         <div class=\"col-xs-12  titleweather\">
 
@@ -168,12 +172,6 @@ $city = htmlspecialchars($_POST["city"]);
         echo '</div>';
     }
     ?>
-
-
-
-
-<div id="weatherforecast" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 panel panel-default ">
-</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
