@@ -1,22 +1,30 @@
- body {
+@font-face {
+    font-family: 'Anders Font';
+    src: url('font/Anders-Font/Anders Font/Anders.ttf') format('truetype');}
+
+body {
      -webkit-background-size: cover;
      -moz-background-size: cover;
      -o-background-size: cover;
      background-size: cover;
- }
+    font-family: 'Josefin Sans', sans-serif;
+font-size: x-large;
+}
 
- .page-header h1 {
-
+ .page-header #title {
 
     font-size: x-large;
     color: black;
     /*text-shadow: 3px 3px  #919191; */
 
-     font-family: 'Indie Flower', cursive;
-
+     font-family: 'Anders Font', sans-serif;
 
  }
- .inline{
+
+.page-header h1 {
+    font-size: 60px;
+}
+.inline{
      display: inline-block;
  }
 
@@ -29,7 +37,11 @@
      border-bottom: none;
  }
  #affichage{
- }
+
+    font-family: 'Exo 2', sans-serif;
+     font-size: small;
+
+}
  .deezer-widget-player{
      margin: auto;
      width:350px;
@@ -89,10 +101,14 @@
      font-size: 30px;
      padding-bottom: 25px;
  }
- .weathertommorow{
+ .weathertomorow{
      height: 50px;
  }
  #search{
      padding-top: 20px;
      padding-bottom: 20px;
+ }
+
+ .history {
+
  }

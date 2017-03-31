@@ -34,7 +34,7 @@ $city = htmlspecialchars($_POST["city"]);
     }
 
 ?>
-<html lang="en" >
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -45,7 +45,9 @@ $city = htmlspecialchars($_POST["city"]);
     <link href="css/owfont-regular.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
 
@@ -58,7 +60,7 @@ $city = htmlspecialchars($_POST["city"]);
 
 <div class="page-header">
 
-    <div class="col-md-offset-3 col-md-6 col-xs-offset-2 col-xs-8 transparentbackground"><h1 class="text-center"> WeatherJam: the sound that fits your moods. </h1></div>
+    <div id="title" class="col-md-offset-3 col-md-6 col-xs-offset-2 col-xs-8 transparentbackground text-center"><h1>WeatherJam:<br>	 </h1> <span id="motto"> the sound that fits your mood. </span></div>
 </div>
 
 
@@ -157,7 +159,7 @@ $city = htmlspecialchars($_POST["city"]);
             Tomorrow
         </div>
     </div>
-    <div class=\"row weathertommorow\">
+    <div class=\"row weathertomorow\">
         <div class=\"col-lg-12 col-md-12\" >
             <div id=\"centeredleft\">
                 <div class=\"weatherico\">
