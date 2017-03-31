@@ -56,7 +56,7 @@ $city = htmlspecialchars($_POST["city"]);
     <title>WeatherJam: the sound that fits your mood </title>
 </head>
 
-<body class="container" style=" background: url('<?php echo $backgroundimage; ?>') no-repeat center center fixed;">
+<body style=" background: url('<?php echo $backgroundimage; ?>') no-repeat center center fixed;">
 
 <div class="page-header">
 
@@ -122,62 +122,44 @@ $city = htmlspecialchars($_POST["city"]);
     <?php
     if (!empty($city)){
         echo "
-<div id='affichage' class=\"col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 transparentbackground container zoom-box\">
+        <div id='affichage' class=\"col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 transparentbackground container zoom-box\">
 
     <div class=\"row\">
-        <div class=\"col-lg-12 col-md-12 titleweather\" >
-            Today 
+        <div class=\"col-xs-12  titleweather\">
+
+            Weather forecast for today in $city.
         </div>
     </div>
-    <div class=\"row weathercontent\">
-        <div class=\"col-md-3 col-xs-12\"><br>
-            <div id=\"centeredleft\">
-                <div class=\"weatherico\">
-                    <i class=\"wi ".$weatherimg[$weathermain]." owf-5x\"></i><br>
-                    <i class=\"wi wi-wind-beaufort-".round($windspeed, 0)." owf-5x\"></i>
-                </div>
 
-                <div class=\"titleleft\">
-                    <span>".$city."</span><br>
-                    <span>".ucfirst($weather)."</span>
-                </div><br>
-            </div>
-        </div>
-        <div id=\"right\" class=\"col-md-5 col-xs-12\">
-            <div id=\"stats\">
-                <i class=\"wi wi-thermometer owf-3x\"></i><span>".$temp."</span><i class=\"wi wi-celsius owf-3x\"></i><br>
-                <i class=\"wi wi-humidity owf-3x\"></i><span>".$humidity." %</span><br>
-                <i class=\"wi wi-barometer owf-3x\"></i><span>".$pressure." Bar</span><br>
-            </div>
-
-        </div>
-        <div class=\"col-lg-3 col-md-12\">
-            <i class=\"wi wi-wind towards-".round($winddegree, 0)."-deg owf-5x\"></i>
-            <span class=\"degreetitle\">".round($winddegree, 0)."</span><i class=\"wi wi-degrees owf-4x\"></i><br>
-        </div>
-    </div>
-    <hr>
     <div class=\"row\">
-        <div class=\"col-lg-12 col-md-12 titleweather\" >
-            Tomorrow
+
+        <div class=\"col-xs-4\"> îcone météo </div>
+        <div class=\"col-xs-4\"> température </div>
+        <div class=\"col-xs-4\">force du vent </div>
+
+    </div>
+
+    <div class=\"row\">
+
+        <div class=\"col-xs-4\"> description météo</div>
+        <div class=\"col-xs-4\"> humiditité </div>
+        <div class=\"col-xs-4\"> direction</div>
+
+    </div>
+
+
+
+
+
+    <div class=\"row\">
+        <div class=\"\">
+            <div class=\"col-xs-8\"> Météo du lendemain </div>
+            <div class=\"col-xs-4\"> pression atmosphérique</div>
+
         </div>
     </div>
-    <div class=\"row weathertomorow\">
-        <div class=\"col-lg-12 col-md-12\" >
-            <div id=\"centeredleft\">
-                <div class=\"weatherico\">
-                    <i class=\"wi ".$weatherimg[$weathermaintom]." owf-5x\"></i>
-
-                </div>
-
-                <div class=\"titleleft\">
-                    <span>".ucfirst($weathertom)."</span>
-                </div><br>
-            </div>
-
-        </div>
-    </div>
-    </div>";
+</div>
+";
         echo '<div id="playlist" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 transparentbackground ">';
         echo '<h1 class="text-center">Deezer</h1>';
         echo '<h2 class="text-center">'.$titledeeze.'</h2>';
