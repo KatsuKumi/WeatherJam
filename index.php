@@ -85,35 +85,38 @@ $city = htmlspecialchars($_POST["city"]);
     </form>
 
 </div>
-<div id="history" class="col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 transparentbackground container" type='hidden'>
+
+    <?php
+    if (empty($city)){
+        echo '<div id="history" class="col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 transparentbackground container" type=\'hidden\'>
 
     <div class="row">
         <div class="col-lg-12 col-md-12 titleweather" >
             History
         </div>
-    </div>
-    <?php
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $sql = "SELECT * FROM search_history LIMIT 10;";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-            echo  $row["date"]. " - Ville : " .  $row["ville"]. " - Temp : " . $row["temp"]. " - Music Title : " .$row["titre"]."<br>";
+    </div>';
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
         }
-    } else {
-        echo "0 results";
+
+        $sql = "SELECT * FROM search_history LIMIT 10;";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo  $row["date"]. " - Ville : " .  $row["ville"]. " - Temp : " . $row["temp"]. " - Music Title : " .$row["titre"]."<br>";
+            }
+        } else {
+            echo "0 results";
+        }
+        $conn->close();
+        echo '</div>';
     }
-    $conn->close();
     ?>
-</div>
 
 
     <?php
