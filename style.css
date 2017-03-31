@@ -8,13 +8,14 @@ body {
      -o-background-size: cover;
      background-size: cover;
     font-family: 'Josefin Sans', sans-serif;
-font-size: x-large;
 }
 
  .page-header #title {
 
     font-size: x-large;
     color: black;
+    /*text-shadow: 3px 3px  #919191; */
+
      font-family: 'Anders Font', sans-serif;
 
  }
@@ -41,17 +42,8 @@ font-size: x-large;
  .page-header{
      border-bottom: none;
  }
-
-
  #affichage{
     font-family: 'Exo 2', sans-serif;
-     font-size: medium;
-
-}
-
-#history
-{
-    font-family: 'Play', sans-serif;
      font-size: small;
      text-align: center ;
 
@@ -86,7 +78,7 @@ font-size: x-large;
      font-size : 25px;
  }
  #tomorrow{
-     height:220px;
+     height: 220px;
      margin-right: 10px;
  }
  #right i{
