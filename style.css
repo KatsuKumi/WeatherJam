@@ -8,14 +8,13 @@ body {
      -o-background-size: cover;
      background-size: cover;
     font-family: 'Josefin Sans', sans-serif;
+font-size: x-large;
 }
 
  .page-header #title {
 
     font-size: x-large;
     color: black;
-    /*text-shadow: 3px 3px  #919191; */
-
      font-family: 'Anders Font', sans-serif;
 
  }
@@ -42,11 +41,28 @@ body {
  .page-header{
      border-bottom: none;
  }
+
+
  #affichage{
     font-family: 'Exo 2', sans-serif;
      font-size: small;
      text-align: center ;
 
+
+}
+
+#history
+{
+    font-family: 'Play', sans-serif;
+     font-size: medium;
+     text-align: justify ;
+
+}
+
+#history span {
+
+    border: solid black 1px;
+    margin-bottom:1px;
 }
  .deezer-widget-player{
      margin: auto;
