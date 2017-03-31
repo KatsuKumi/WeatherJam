@@ -8,7 +8,6 @@ body {
      -o-background-size: cover;
      background-size: cover;
     font-family: 'Josefin Sans', sans-serif;
-font-size: x-large;
 }
 
  .page-header #title {
@@ -33,6 +32,10 @@ font-size: x-large;
     margin-bottom: 50px;
     border-radius: 10px;
 }
+#search{
+
+    font-size: x-large;
+}
 .smallmargin{
     margin-bottom: 10px;
 }
@@ -40,9 +43,9 @@ font-size: x-large;
      border-bottom: none;
  }
  #affichage{
-
     font-family: 'Exo 2', sans-serif;
      font-size: small;
+     text-align: center ;
 
 }
  .deezer-widget-player{
@@ -68,8 +71,14 @@ font-size: x-large;
  #right{
      margin : auto;
  }
- #right span{
+ #affichage span{
      font-size : 25px;
+ }
+ #tomorrow span{
+     font-size : 25px;
+ }
+ #tomorrow{
+     height: 110px;
  }
  #right i{
      width: 30px;
@@ -104,8 +113,13 @@ font-size: x-large;
      font-size: 30px;
      padding-bottom: 25px;
  }
+ #affichage span{
+     margin: 0 15px;
+ }
  .weathertomorow{
      height: 50px;
+     text-align: center ;
+     padding-bottom: 20px;
  }
  #search{
      padding-top: 20px;
