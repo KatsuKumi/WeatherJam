@@ -20,6 +20,7 @@ $city = htmlspecialchars($_POST["city"]);
         $weathertom = $weatherarraytom['weather'][0]['description'];
         $weathermaintom = $weatherarraytom['weather'][0]['main'];
         $backgroundimage = $backgroundimg[$weathermain];
+
         $keyword = $keywordweather[$weathermain][array_rand($keywordweather[$weathermain])];
         $listid = file_get_contents("http://api.deezer.com/search?q=".$keyword);
         $listidarray = json_decode($listid, true);
@@ -52,11 +53,14 @@ $city = htmlspecialchars($_POST["city"]);
 
 
     <link href="css/weather-icons-wind.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
     <link href="css/weather-icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="style.css">
+
     <title>WeatherJam: the sound that fits your mood </title>
 </head>
 
-<body style=" background: url('<?php echo $backgroundimage; ?>') no-repeat center fixed;">
+<body style=" background: url('<?php echo $backgroundimage; ?>') no-repeat center center fixed;">
 
 <div class="page-header">
 
@@ -78,7 +82,7 @@ $city = htmlspecialchars($_POST["city"]);
 
 
                 <input type="text" name="city" class="form-control" id="city" value="" placeholder="Enter a city name.">
-                <button type="submit" id="sendbtn" class="btn btn-default">Submit</button>
+                <button type="submit" id="sendbtn" class="btn btn-default"><img src="playbutton.png"> </button>
 
             </div>
         </div>
@@ -89,9 +93,10 @@ $city = htmlspecialchars($_POST["city"]);
     <?php
     if (empty($city)){
         echo '<div id="history" class="col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 transparentbackground container" type=\'hidden\'>
+
     <div class="row">
         <div class="col-lg-12 col-md-12 titleweather" >
-            History
+            <strong> History </strong>
         </div>
     </div>';
         // Create connection
@@ -107,7 +112,7 @@ $city = htmlspecialchars($_POST["city"]);
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo  $row["date"]. " - City : " .  $row["ville"]. " - Temp : " . $row["temp"]. " - Music Title : " .$row["titre"]. " - Weather : " .$row["meteo"]."<br>";
+                echo  '<span>'.$row["date"]. " - City : " .  $row["ville"]. " - Temp : " . $row["temp"]. " - Music Title : " .$row["titre"]. " - Weather : " .$row["meteo"]."</span><br>";
             }
         } else {
             echo "0 results";
@@ -122,7 +127,8 @@ $city = htmlspecialchars($_POST["city"]);
     if (!empty($city)){
         echo "
         <div id='affichage' class=\"col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 transparentbackground container zoom-box\">
-<div class=\"row\">
+
+    <div class=\"row\">
         <div class=\"col-xs-12  titleweather\">
 
             Weather forecast for today in ".$realcity."
@@ -164,6 +170,9 @@ $city = htmlspecialchars($_POST["city"]);
         echo '</div>';
     }
     ?>
+
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
