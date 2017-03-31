@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php include('weatherimgtable.php');
+include('mysql.php');
 $backgroundimage = "bg.jpg";
 $city = htmlspecialchars($_POST["city"]);
     if (!empty($city)) {
@@ -18,10 +19,22 @@ $city = htmlspecialchars($_POST["city"]);
         $weathertom = $weatherarraytom['weather'][0]['description'];
         $weathermaintom = $weatherarraytom['weather'][0]['main'];
         $backgroundimage = $backgroundimg[$weathermain];
+
+        $keyword = $keywordweather[$weathermain][array_rand($keywordweather[$weathermain])];
+        $listid = file_get_contents("http://api.deezer.com/search?q=".$keyword);
+        $listidarray = json_decode($listid, true);
+        $randomtabletrackdeez = $listidarray["data"][array_rand($listidarray["data"])];
+        $trackid = $randomtabletrackdeez['id'];
+        $titledeeze = $randomtabletrackdeez['title'];
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        $sql = "INSERT INTO search_history (ville,temp,meteo,titre) VALUES( '$city', '$temp', '$weather', '$titledeeze')";
+        $conn->query($sql);
+        $conn->close();
     }
 
 ?>
-<html lang="en">
+<html lang="en" >
 
 <head>
     <meta charset="UTF-8">
@@ -49,7 +62,7 @@ $city = htmlspecialchars($_POST["city"]);
 </div>
 
 
-<div class="row" >
+<div class="row zoom-box" >
 
 
 
@@ -70,14 +83,47 @@ $city = htmlspecialchars($_POST["city"]);
     </form>
 
 </div>
-<div id="history" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 transparentbackground" type='hidden'>
+<div id="history" class="col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 transparentbackground container" type='hidden'>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 titleweather" >
+            History
+        </div>
+    </div>
+    <?php
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM search_history LIMIT 10;";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo  $row["date"]. " - Ville : " .  $row["ville"]. " - Temp : " . $row["temp"]. " - Music Title : " .$row["titre"]."<br>";
+        }
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+    ?>
 </div>
 
 
     <?php
     if (!empty($city)){
         echo "
-<div id='affichage' class=\"col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 transparentbackground container\">
+<div id='affichage' class=\"col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8 transparentbackground container zoom-box\">
+
+    <div class=\"row\">
+        <div class=\"col-lg-12 col-md-12 titleweather\" >
+            Today 
+        </div>
+    </div>
     <div class=\"row weathercontent\">
         <div class=\"col-md-3 col-xs-12\"><br>
             <div id=\"centeredleft\">
@@ -101,8 +147,8 @@ $city = htmlspecialchars($_POST["city"]);
 
         </div>
         <div class=\"col-lg-3 col-md-12\">
-            <i class=\"wi wi-wind towards-".$winddegree."-deg owf-5x\"></i>
-            <span class=\"degreetitle\">".$winddegree."</span><i class=\"wi wi-degrees owf-4x\"></i><br>
+            <i class=\"wi wi-wind towards-".round($winddegree, 0)."-deg owf-5x\"></i>
+            <span class=\"degreetitle\">".round($winddegree, 0)."</span><i class=\"wi wi-degrees owf-4x\"></i><br>
         </div>
     </div>
     <hr>
@@ -127,12 +173,6 @@ $city = htmlspecialchars($_POST["city"]);
         </div>
     </div>
     </div>";
-        $keyword = $keywordweather[$weathermain][array_rand($keywordweather[$weathermain])];
-        $listid = file_get_contents("http://api.deezer.com/search?q=".$keyword);
-        $listidarray = json_decode($listid, true);
-        $randomtabletrackdeez = $listidarray["data"][array_rand($listidarray["data"])];
-        $trackid = $randomtabletrackdeez['id'];
-        $titledeeze = $randomtabletrackdeez['title'];
         echo '<div id="playlist" class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8 transparentbackground ">';
         echo '<h1 class="text-center">Deezer</h1>';
         echo '<h2 class="text-center">'.$titledeeze.'</h2>';
@@ -158,6 +198,7 @@ $city = htmlspecialchars($_POST["city"]);
         js.src = "http://e-cdn-files.deezer.com/js/widget/loader.js";
         djs.parentNode.insertBefore(js, djs);
     }(document, "script", "deezer-widget-loader"));
+
 </script>
 
 </body>
