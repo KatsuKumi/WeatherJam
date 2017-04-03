@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Anders Font';
-    src: url('font/Anders-Font/Anders Font/Anders.ttf') format('truetype');}
+    src: url('../font/Anders-Font/Anders Font/Anders.ttf') format('truetype');}
 
 body {
      -webkit-background-size: cover;
