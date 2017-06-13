@@ -2,7 +2,7 @@
 
 WeatherJam,the sound that fits your mood. 
 
-Site de Météo créer à l'aide de l'api OpenWeatherMap et deezer.
+Site de Météo créé à l'aide de l'api OpenWeatherMap et Deezer.
 
 Affichage de la météo et d'une musique en rapport avec la météo.
 
